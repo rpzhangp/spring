@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--DI依赖注入
+        setter注入
+        UserMapper usermapper=new UserMapperImpl();
+        UserService userservice=new UserServiceImpl();
+    -->
+    <bean id="userMapper" class="com.rushuni.mapper.impl.UserMapperImpl"></bean>
+    <bean id="userService" class="com.rushuni.service.impl.UserServiceImpl">
+        <property name="userName" value="rush"></property>
+        <property name="userMapper" ref="userMapper"></property>
+        <property name="mylist">
+            <list>
+                <value>1</value>
+                <value>2</value>
+            </list>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="username">rush</prop>
+                <prop key="password">123</prop>
+            </props>
+        </property>
+        <property name="myarr">
+            <array>
+                <value>1</value>
+            </array>
+        </property>
+        <property name="mymap">
+            <map>
+                <entry key="male" value="男"></entry>
+                <entry key="female" value="女"></entry>
+            </map>
+        </property>
+        <property name="myset">
+            <set>
+                <value>00</value>
+            </set>
+        </property>
+    </bean>
+
+
+
+    <bean id="userServiceByConstructor" class="com.rushuni.service.impl.UserServiceImpl">
+        <constructor-arg name="userName" value="rushuni"></constructor-arg>
+        <constructor-arg name="userMapper" ref="userMapper"></constructor-arg>
+    </bean>
+    <!--使用静态工厂创建-->
+    <bean id="userService2" class="util.UserFactory" factory-method="getUserService"></bean>
+</beans>

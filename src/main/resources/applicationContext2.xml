@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--DI依赖注入
+        1.setter注入
+        UserMapper usermapper=new UserMapperImpl();
+        UserService userservice=new UserServiceImpl();
+    -->
+    <bean id="userMapper" class="com.rushuni.mapper.impl.UserMapperImpl"></bean>
+    <bean id="userService" class="com.rushuni.service.impl.UserServiceImpl">
+        <property name="userName" value="rush"></property>
+        <property name="userMapper" ref="userMapper"></property>
+    </bean>
+    <!--2.构造器注入-->
+    <bean id="userMapper2" class="com.rushuni.mapper.impl.UserMapperImpl"></bean>
+    <bean id="userService2" class="com.rushuni.service.impl.UserServiceImpl">
+        <constructor-arg name="userName"  value="zhangpei"></constructor-arg>
+        <constructor-arg name="userMapper" ref="userMapper2"></constructor-arg>
+    </bean>
+    <!--3命名空间注入-->
+    <bean id="userMapper3" class="com.rushuni.mapper.impl.UserMapperImpl"></bean>
+    <bean id="userService3" class="com.rushuni.service.impl.UserServiceImpl" p:userMapper-ref="userMapper3">
+
+    </bean>
+
+
+</beans>
